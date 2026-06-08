@@ -7,31 +7,31 @@ module "vercel" {
       name      = "kls-portfolio-site"
       repo      = "kirkalyn13/kls-portfolio-site"
       framework = "nextjs"
-      domain    = "kirkalynsantos"
+      domain    = "kirkalynsantos.vercel.app"
     },
     {
       name      = "equipment-monitoring-system-frontend"
       repo      = "kirkalyn13/equipment-monitoring-system-frontend"
       framework = "create-react-app"
-      domain    = "sea-ems"
+      domain    = "sea-ems.vercel.app"
     },
     {
       name      = "mgnl-groovy-generator-app"
       repo      = "kirkalyn13/mgnl-groovy-generator-app"
       framework = "vite"
-      domain    = "mgnl-groovy-generator"
+      domain    = "mgnl-groovy-generator.vercel.app"
     },
     {
       name      = "motor-monitor-frontend"
       repo      = "kirkalyn13/motor-monitor-frontend"
       framework = "nextjs"
-      domain    = "motor-monitor"
+      domain    = "motor-monitor.vercel.app"
     },
     {
       name      = "tva-dashboard"
       repo      = "kirkalyn13/tva-dashboard"
       framework = "create-react-app"
-      domain    = "time-variance-authority"
+      domain    = "time-variance-authority.vercel.app"
     }
   ]
 }
