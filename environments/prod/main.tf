@@ -4,12 +4,12 @@ module "vercel" {
 
   projects = [
     {
-      name      = "kls-portfolio-site"
+      name      = "kirkalynsantos"
       repo      = "kirkalyn13/kls-portfolio-site"
       framework = "nextjs"
     },
     {
-      name      = "equipment-monitoring-system-frontend"
+      name      = "sea-ems"
       repo      = "kirkalyn13/equipment-monitoring-system-frontend"
       framework = "create-react-app"
     },
@@ -24,7 +24,7 @@ module "vercel" {
       framework = "nextjs"
     },
     {
-      name      = "tva-dashboard"
+      name      = "time-variance-authority"
       repo      = "kirkalyn13/tva-dashboard"
       framework = "create-react-app"
     }
