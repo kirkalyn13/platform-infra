@@ -8,5 +8,6 @@ variable "projects" {
     name      = string
     repo      = string
     framework = string
+    domain    = optional(string)
   }))
 }

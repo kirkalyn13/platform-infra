@@ -22,3 +22,10 @@ resource "vercel_project" "apps" {
     repo = each.value.repo
   }
 }
+
+resource "vercel_project_domain" "domain" {
+  for_each   = { for p in var.projects : p.name => p if p.domain != null }
+
+  project_id = vercel_project.apps[each.key].id
+  domain     = each.value.domain
+}

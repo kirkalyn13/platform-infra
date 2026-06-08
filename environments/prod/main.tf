@@ -4,29 +4,34 @@ module "vercel" {
 
   projects = [
     {
-      name      = "kirkalynsantos"
+      name      = "kls-portfolio-site"
       repo      = "kirkalyn13/kls-portfolio-site"
       framework = "nextjs"
+      domain    = "kirkalynsantos"
     },
     {
-      name      = "sea-ems"
+      name      = "equipment-monitoring-system-frontend"
       repo      = "kirkalyn13/equipment-monitoring-system-frontend"
       framework = "create-react-app"
+      domain    = "sea-ems"
     },
     {
       name      = "mgnl-groovy-generator-app"
       repo      = "kirkalyn13/mgnl-groovy-generator-app"
       framework = "vite"
+      domain    = "mgnl-groovy-generator"
     },
     {
       name      = "motor-monitor-frontend"
       repo      = "kirkalyn13/motor-monitor-frontend"
       framework = "nextjs"
+      domain    = "motor-monitor"
     },
     {
-      name      = "time-variance-authority"
+      name      = "tva-dashboard"
       repo      = "kirkalyn13/tva-dashboard"
       framework = "create-react-app"
+      domain    = "time-variance-authority"
     }
   ]
 }
