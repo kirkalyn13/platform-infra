@@ -1,0 +1,69 @@
+name: Render Infrastructure
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Terraform action to run'
+        required: true
+        type: choice
+        options:
+          - plan
+          - apply
+          - destroy
+      service:
+        description: 'Render service name (must match key in main.tf)'
+        required: true
+        type: string
+
+jobs:
+  terraform:
+    name: '${{ inputs.action }} - ${{ inputs.service }}'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: environments/prod
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+        env:
+          TF_VAR_vercel_api_token: ${{ secrets.VERCEL_API_TOKEN }}
+          TF_VAR_render_api_key: ${{ secrets.RENDER_API_KEY }}
+          TF_VAR_render_owner_id: ${{ secrets.RENDER_OWNER_ID }}
+
+      - name: Terraform Plan
+        if: inputs.action == 'plan'
+        run: |
+          terraform plan \
+            -target='module.render.render_web_service.services["${{ inputs.service }}"]'
+        env:
+          TF_VAR_vercel_api_token: ${{ secrets.VERCEL_API_TOKEN }}
+          TF_VAR_render_api_key: ${{ secrets.RENDER_API_KEY }}
+          TF_VAR_render_owner_id: ${{ secrets.RENDER_OWNER_ID }}
+
+      - name: Terraform Apply
+        if: inputs.action == 'apply'
+        run: |
+          terraform apply -auto-approve \
+            -target='module.render.render_web_service.services["${{ inputs.service }}"]'
+        env:
+          TF_VAR_vercel_api_token: ${{ secrets.VERCEL_API_TOKEN }}
+          TF_VAR_render_api_key: ${{ secrets.RENDER_API_KEY }}
+          TF_VAR_render_owner_id: ${{ secrets.RENDER_OWNER_ID }}
+
+      - name: Terraform Destroy
+        if: inputs.action == 'destroy'
+        run: |
+          terraform destroy -auto-approve \
+            -target='module.render.render_web_service.services["${{ inputs.service }}"]'
+        env:
+          TF_VAR_vercel_api_token: ${{ secrets.VERCEL_API_TOKEN }}
+          TF_VAR_render_api_key: ${{ secrets.RENDER_API_KEY }}
+          TF_VAR_render_owner_id: ${{ secrets.RENDER_OWNER_ID }}
