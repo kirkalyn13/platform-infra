@@ -29,3 +29,10 @@ module "dns" {
   domain_name = var.domain_name
   instance_ip = module.ec2.instance_public_ip
 }
+
+module "cloudwatch" {
+  source               = "../../modules/cloudwatch"
+  env                  = "dev"
+  app_name             = "dev-cloudwatch"
+  lambda_function_name = "demov-cloudwatch-lambda"
+}

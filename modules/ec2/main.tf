@@ -116,7 +116,7 @@ resource "aws_instance" "app" {
     nohup java -jar "${var.app_jar_path}" \
       --server.port=${var.app_port} \
       --app.api-key="$API_KEY" \
-      > /var/log/motor-monitor.log 2>&1 &
+      > /var/log/app.log 2>&1 &
   EOF
   )
 
