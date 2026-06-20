@@ -6,21 +6,21 @@ module "networking" {
 }
 
 module "secrets" {
-  source      = "../../modules/secrets"
-  app_name    = var.app_name
-  api_key     = var.api_key
+  source   = "../../modules/secrets"
+  app_name = var.app_name
+  api_key  = var.api_key
 }
 
 module "ec2" {
-  source            = "../../modules/ec2"
-  app_name          = var.app_name
-  vpc_id            = module.networking.vpc_id
-  subnet_id         = module.networking.public_subnet_id
-  ami_id            = var.ami_id
-  instance_type     = var.instance_type
-  app_port          = var.app_port
-  app_jar_path      = var.app_jar_path
-  api_secret_arn    = module.secrets.secret_arn
+  source         = "../../modules/ec2"
+  app_name       = var.app_name
+  vpc_id         = module.networking.vpc_id
+  subnet_id      = module.networking.public_subnet_id
+  ami_id         = var.ami_id
+  instance_type  = var.instance_type
+  app_port       = var.app_port
+  app_jar_path   = var.app_jar_path
+  api_secret_arn = module.secrets.secret_arn
 }
 
 module "dns" {

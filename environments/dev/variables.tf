@@ -1,5 +1,5 @@
 variable "app_name" {
-  type    = string
+  type = string
 }
 
 variable "aws_region" {
@@ -29,7 +29,7 @@ variable "app_port" {
 }
 
 variable "app_jar_path" {
-  type    = string
+  type = string
 }
 
 variable "domain_name" {
