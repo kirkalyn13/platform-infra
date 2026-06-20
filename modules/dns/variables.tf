@@ -4,7 +4,6 @@ variable "app_name" {
 
 variable "domain_name" {
   type    = string
-  default = "motor-monitor-v2.dev"
 }
 
 variable "instance_ip" {

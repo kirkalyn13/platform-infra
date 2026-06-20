@@ -1,6 +1,5 @@
 variable "app_name" {
   type    = string
-  default = "motor-monitor-v2"
 }
 
 variable "aws_region" {
@@ -31,7 +30,6 @@ variable "app_port" {
 
 variable "app_jar_path" {
   type    = string
-  default = "/opt/app/motor-monitor-v2.jar"
 }
 
 variable "domain_name" {
