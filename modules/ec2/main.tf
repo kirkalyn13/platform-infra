@@ -95,30 +95,12 @@ resource "aws_instance" "app" {
   iam_instance_profile        = aws_iam_instance_profile.ec2.name
   associate_public_ip_address = true
 
-  user_data = base64encode(<<-EOF
-    #!/bin/bash
-    set -e
-
-    # Install Java 17
-    yum update -y
-    amazon-linux-extras enable corretto17
-    yum install -y java-17-amazon-corretto awscli
-
-    # Fetch API key from Secrets Manager at boot
-    API_KEY=$(aws secretsmanager get-secret-value \
-      --secret-id "${var.api_secret_arn}" \
-      --query SecretString \
-      --output text \
-      --region ${var.aws_region} \
-      | python3 -c "import sys,json; print(json.load(sys.stdin)['api_key'])")
-
-    # Run Spring Boot app
-    nohup java -jar "${var.app_jar_path}" \
-      --server.port=${var.app_port} \
-      --app.api-key="$API_KEY" \
-      > /var/log/app.log 2>&1 &
-  EOF
-  )
+  user_data = base64encode(templatefile("${path.root}/scripts/user_data.sh", {
+    api_secret_arn = var.api_secret_arn
+    aws_region     = var.aws_region
+    app_jar_path   = var.app_jar_path
+    app_port       = var.app_port
+  }))
 
   tags = {
     Name = "${var.app_name}-instance"
