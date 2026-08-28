@@ -11,3 +11,13 @@ variable "aws_region" {
   type    = string
   default = "us-east-1"
 }
+
+variable "create_public_subnet" {
+  type    = bool
+  default = true
+}
+
+variable "create_private_subnet" {
+  type    = bool
+  default = false
+}
