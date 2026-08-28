@@ -31,7 +31,24 @@ resource "aws_iam_policy" "read_secret" {
         "secretsmanager:GetSecretValue",
         "secretsmanager:DescribeSecret"
       ]
-      Resource = var.api_secret_arn
+      Resource = values(var.secret_arns)
+    }]
+  })
+}
+
+resource "aws_iam_policy" "read_parameters" {
+  name        = "${var.app_name}-read-parameters"
+  description = "Allow EC2 to read app config from Parameter Store"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Action = [
+        "ssm:GetParameter",
+        "ssm:GetParameters"
+      ]
+      Resource = [for name in var.parameter_names : "arn:aws:ssm:*:*:parameter/${var.app_name}/${name}"]
     }]
   })
 }
