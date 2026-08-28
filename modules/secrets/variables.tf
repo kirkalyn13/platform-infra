@@ -4,6 +4,5 @@ variable "app_name" {
 
 variable "secrets" {
   type      = map(string)
-  sensitive = true
   default   = {}
 }
