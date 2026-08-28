@@ -26,8 +26,8 @@ resource "aws_iam_policy" "read_secret" {
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
-      Effect   = "Allow"
-      Action   = [
+      Effect = "Allow"
+      Action = [
         "secretsmanager:GetSecretValue",
         "secretsmanager:DescribeSecret"
       ]
@@ -113,10 +113,10 @@ resource "aws_instance" "app" {
   associate_public_ip_address = true
 
   user_data = base64encode(templatefile("${path.root}/scripts/user_data.sh", {
-    api_secret_arn = var.api_secret_arn
-    aws_region     = var.aws_region
-    app_jar_path   = var.app_jar_path
-    app_port       = var.app_port
+    secret_arns  = var.secret_arns
+    aws_region   = var.aws_region
+    app_jar_path = var.app_jar_path
+    app_port     = var.app_port
   }))
 
   tags = {
