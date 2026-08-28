@@ -52,11 +52,11 @@ resource "aws_iam_instance_profile" "ec2" {
 
 resource "aws_security_group" "ec2" {
   name        = "${var.app_name}-ec2-sg"
-  description = "Allow inbound traffic to Spring Boot app"
+  description = "Allow inbound traffic to application"
   vpc_id      = var.vpc_id
 
   ingress {
-    description = "Spring Boot app port"
+    description = "App port"
     from_port   = var.app_port
     to_port     = var.app_port
     protocol    = "tcp"
@@ -64,7 +64,7 @@ resource "aws_security_group" "ec2" {
   }
 
   ingress {
-    description = "SSH - restrict to your IP in prod"
+    description = "SSH - restrict to your IP in the env"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"

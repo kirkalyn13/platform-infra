@@ -2,7 +2,8 @@ variable "app_name" {
   type = string
 }
 
-variable "api_key" {
-  type      = string
+variable "secrets" {
+  type      = map(string)
   sensitive = true
+  default   = {}
 }

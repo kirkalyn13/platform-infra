@@ -1,7 +1,7 @@
-output "secret_arn" {
-  value = aws_secretsmanager_secret.api_key.arn
+output "secret_arns" {
+  value = { for k, v in aws_secretsmanager_secret.this : k => v.arn }
 }
 
-output "secret_name" {
-  value = aws_secretsmanager_secret.api_key.name
+output "secret_ids" {
+  value = { for k, v in aws_secretsmanager_secret.this : k => v.id }
 }
