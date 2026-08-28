@@ -29,12 +29,15 @@ variable "app_jar_path" {
   type = string
 }
 
-variable "api_secret_arn" {
-  description = "ARN of the Secrets Manager secret containing the API key"
-  type        = string
-}
-
 variable "aws_region" {
   type    = string
   default = "us-east-1"
+}
+
+variable "secret_arns" {
+  type = map(string)
+}
+
+variable "parameter_names" {
+  type = map(string)
 }
