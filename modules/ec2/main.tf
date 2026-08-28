@@ -114,6 +114,7 @@ resource "aws_instance" "app" {
 
   user_data = base64encode(templatefile("${path.root}/scripts/user_data.sh", {
     secret_arns  = var.secret_arns
+    parameter_names = var.parameter_names
     aws_region   = var.aws_region
     app_jar_path = var.app_jar_path
     app_port     = var.app_port
