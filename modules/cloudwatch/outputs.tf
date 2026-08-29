@@ -7,5 +7,5 @@ output "lambda_log_group_name" {
 }
 
 output "cpu_alarm_arn" {
-  value = var.instance_id != null ? aws_cloudwatch_metric_alarm.high_cpu[0].arn : null
+  value = var.create_cpu_alarm ? aws_cloudwatch_metric_alarm.high_cpu[0].arn : null
 }

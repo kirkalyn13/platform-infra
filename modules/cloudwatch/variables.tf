@@ -16,6 +16,11 @@ variable "instance_id" {
   default = null
 }
 
+variable "create_cpu_alarm" {
+  type    = bool
+  default = false
+}
+
 variable "cpu_alarm_threshold" {
   type    = number
   default = 80

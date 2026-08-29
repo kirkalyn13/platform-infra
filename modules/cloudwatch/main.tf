@@ -10,7 +10,7 @@ resource "aws_cloudwatch_log_group" "lambda" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "high_cpu" {
-  count               = var.instance_id != null ? 1 : 0
+  count               = var.create_cpu_alarm != null ? 1 : 0
   alarm_name          = "${var.app_name}-high-cpu"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 2
