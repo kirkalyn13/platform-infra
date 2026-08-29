@@ -67,6 +67,11 @@ resource "aws_iam_role_policy_attachment" "read_parameters" {
   policy_arn = aws_iam_policy.read_parameters[0].arn
 }
 
+resource "aws_iam_instance_profile" "ec2" {
+  name = "${var.app_name}-ec2-profile"
+  role = aws_iam_role.ec2.name
+}
+
 # -------------------------------------------------------------------
 # Security Group — inbound on app port + SSH, outbound open
 # -------------------------------------------------------------------
