@@ -20,6 +20,7 @@ resource "aws_iam_role" "ec2" {
 }
 
 resource "aws_iam_policy" "read_secret" {
+  count       = length(var.secret_arns) > 0 ? 1 : 0
   name        = "${var.app_name}-read-secret"
   description = "Allow EC2 to read the app API key from Secrets Manager"
 
@@ -37,6 +38,7 @@ resource "aws_iam_policy" "read_secret" {
 }
 
 resource "aws_iam_policy" "read_parameters" {
+  count       = length(var.parameter_names) > 0 ? 1 : 0
   name        = "${var.app_name}-read-parameters"
   description = "Allow EC2 to read app config from Parameter Store"
 
