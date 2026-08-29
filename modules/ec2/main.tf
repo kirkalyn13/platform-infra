@@ -56,13 +56,15 @@ resource "aws_iam_policy" "read_parameters" {
 }
 
 resource "aws_iam_role_policy_attachment" "read_secret" {
+  count      = length(var.secret_arns) > 0 ? 1 : 0
   role       = aws_iam_role.ec2.name
-  policy_arn = aws_iam_policy.read_secret.arn
+  policy_arn = aws_iam_policy.read_secret[0].arn
 }
 
-resource "aws_iam_instance_profile" "ec2" {
-  name = "${var.app_name}-ec2-profile"
-  role = aws_iam_role.ec2.name
+resource "aws_iam_role_policy_attachment" "read_parameters" {
+  count      = length(var.parameter_names) > 0 ? 1 : 0
+  role       = aws_iam_role.ec2.name
+  policy_arn = aws_iam_policy.read_parameters[0].arn
 }
 
 # -------------------------------------------------------------------
